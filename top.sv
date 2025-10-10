@@ -9,18 +9,34 @@ module top (    input logic clk,
                 );
     logic [5 : 0] input1, input2, add_res, sub_res, res;
     logic [3 : 0] switch_input;
-    logic en1, en2, en3, add_or_sub;
+    logic en1, en2, en3, add_or_sub, is_negative;
     assign add_or_sub = sw[4];
     assign switch_input = sw[3 : 0];
 
-    state_selector selection(.clk(clk), .reset(btnL), .progress(btnU), .en1(en1), .en2(en2), .en3(en3));
+    state_selector selection(.clk(clk), .reset(btnL), .progresss(btnU), .en1(en1), .en2(en2), .en3(en3));
 
     input_select operand1_selection(.clk(clk), .en(en1), .reset(btnL), .switch_input(switch_input), .operand(input1));
     input_select operand2_selection(.clk(clk), .en(en2), .reset(btnL), .switch_input(switch_input), .operand(input2));
-    result_selector result_assignment(.add_res(add_res), .sub_res(sub_res), .en(add_or_sub), .res(res));
 
     addition addition_compute(.b1(input1), .b2(input2), .result(add_res));
     subtraction subtraction_compute(.b1(input1), .b2(input2), .result(sub_res));
+    result_selector result_assignment(.add_res(add_res), .sub_res(sub_res), .en(add_or_sub), .is_negative(is_negative), .res(res));
+
+    digit_selector(.clk(clk), .reset(btnL), .is_negative(is_negative), .is_dec(ADD SOMETHING HERE), )
+
+    /*
+
+module digit_selector(input logic clk, 
+                        input logic reset, 
+                        input logic is_negative,
+                        input logic is_dec,
+                        input logic [5 : 0] display_value,
+                        output logic[1 : 0] digit);
+
+
+
+
+    */
 
 
 endmodule

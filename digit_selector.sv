@@ -1,6 +1,12 @@
-module digit_selector(input logic clk, reset, output logic[1 : 0] digit)
+module digit_selector(input logic clk, 
+                        input logic reset, 
+                        input logic is_negative,
+                        input logic is_dec,
+                        input logic [5 : 0] display_value,
+                        output logic[1 : 0] digit);
 
     logic [18 : 0] timer;
+
 
     typedef enum logic [1 : 0] {S1, S2, S3} statetype;
     statetype state, nextstate;
@@ -19,6 +25,7 @@ module digit_selector(input logic clk, reset, output logic[1 : 0] digit)
         end
     end
 
+
     always_comb begin
 
         nextstate = state;
@@ -30,6 +37,8 @@ module digit_selector(input logic clk, reset, output logic[1 : 0] digit)
 
         endcase
     end
+
+
 
     assign digit = state;
 
