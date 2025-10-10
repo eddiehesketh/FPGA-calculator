@@ -7,7 +7,7 @@ module top (    input logic clk,
                 output logic [2 : 0] an
 
                 );
-    logic [5 : 0] input1, input2, add_res, sub_res;
+    logic [5 : 0] input1, input2, add_res, sub_res, res;
     logic [3 : 0] switch_input;
     logic en1, en2, en3, add_or_sub;
     assign add_or_sub = sw[4];
@@ -17,6 +17,7 @@ module top (    input logic clk,
 
     input_select operand1_selection(.clk(clk), .en(en1), .reset(btnL), .switch_input(switch_input), .operand(input1));
     input_select operand2_selection(.clk(clk), .en(en2), .reset(btnL), .switch_input(switch_input), .operand(input2));
+    result_selector result_assignment(.add_res(add_res), .sub_res(sub_res), .en(add_or_sub), .res(res));
 
     addition addition_compute(.b1(input1), .b2(input2), .result(add_res));
     subtraction subtraction_compute(.b1(input1), .b2(input2), .result(sub_res));
