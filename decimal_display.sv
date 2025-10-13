@@ -1,5 +1,5 @@
-module hex_display(  input logic[3 : 0] val,
-                        output logic[6 : 0] segments)
+module hex_display(input logic[3 : 0]  val,
+                   output logic[6 : 0] segments);
 
     always_comb begin
         case (val)

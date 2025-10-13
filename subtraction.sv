@@ -1,3 +1,25 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 11.10.2025 16:14:22
+// Design Name: 
+// Module Name: subtraction
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
 module subtraction #(parameter n = 6)(input logic[n - 1 : 0] b1, b2, output logic[n - 1 : 0] result);
 
     logic [n - 1 : 0] s2;

@@ -1,9 +1,27 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 11.10.2025 16:14:22
+// Design Name: 
+// Module Name: digit_selector
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
 module digit_selector(input logic clk, 
-                        input logic reset, 
-                        input logic is_negative,
-                        input logic is_dec,
-                        input logic [5 : 0] display_value,
-                        output logic[1 : 0] digit);
+                        input logic reset,
+                        output logic[3 : 0] digit);
 
     logic [18 : 0] timer;
 
@@ -37,10 +55,16 @@ module digit_selector(input logic clk,
 
         endcase
     end
+    
+    always_comb begin
+        case (state) 
+            S1: digit = 4'b1110;  // Active low: turns on first display
+            S2: digit = 4'b1101;  // Active low: turns on second display
+            S3: digit = 4'b1011;  // Active low: turns on third display
+            default: digit = 4'b1111; // All off
+        endcase
+    end
 
-
-
-    assign digit = state;
 
 
 endmodule
