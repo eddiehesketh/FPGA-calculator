@@ -20,16 +20,30 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module segment_display( input logic[3 : 0] digit,
-                        input logic show_negative,
-                        input logic is_dec,
-                        input logic [5 : 0] display_value,
-                        output logic[6 : 0] segments);
+module segment_display(
+    input   logic [3 : 0]   digit,
+    input   logic           show_negative,
+    input   logic           is_dec,
+    input   logic [5 : 0]   display_value,
+    output  logic [6 : 0]   segments
+);
 
-    logic [6 : 0] first_hex, second_hex, first_dec, second_dec;
+    logic [6 : 0] first_hex;
+    logic [6 : 0] second_hex;
+    logic [6 : 0] first_dec;
+    logic [6 : 0] second_dec;
 
-    hex_display both_hex_disp(.val(display_value), .segments1(first_hex), .segments2(second_hex));
-    decimal_display both_dec_disp(.val(display_value), .segments1(first_dec), .segments2(second_dec));
+    hex_display both_hex_disp(
+        .val(display_value), 
+        .segments1(first_hex), 
+        .segments2(second_hex)
+    );
+    
+    decimal_display both_dec_disp(
+        .val(display_value), 
+        .segments1(first_dec), 
+        .segments2(second_dec)
+    );
 
     always_comb begin
         case (digit)

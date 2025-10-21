@@ -19,15 +19,18 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-module digit_selector(input logic clk, 
-                        input logic reset,
-                        output logic[3 : 0] digit);
+module digit_selector(
+    input   logic         clk, 
+    input   logic         reset,
+    output  logic [3 : 0] digit
+);
 
     logic [18 : 0] timer;
 
 
     typedef enum logic [1 : 0] {S1, S2, S3} statetype;
-    statetype state, nextstate;
+    statetype state; 
+    statetype nextstate;
 
     always_ff @(posedge clk, posedge reset) begin
         if (reset) begin
@@ -58,10 +61,10 @@ module digit_selector(input logic clk,
     
     always_comb begin
         case (state) 
-            S1: digit = 4'b1110;  // Active low: turns on first display
-            S2: digit = 4'b1101;  // Active low: turns on second display
-            S3: digit = 4'b1011;  // Active low: turns on third display
-            default: digit = 4'b1111; // All off
+            S1: digit = 4'b1110;  // turns on first display
+            S2: digit = 4'b1101;  // turns on second display
+            S3: digit = 4'b1011;  // turns on third display
+            default: digit = 4'b1111; // all off
         endcase
     end
 

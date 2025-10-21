@@ -1,10 +1,42 @@
-module state_selector(input logic clk, reset, progress, output logic en1, en2, en3);
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 11.10.2025 16:14:22
+// Design Name: 
+// Module Name: state_selector
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+module state_selector (
+    input   logic clk, 
+    input   logic reset, 
+    input   logic progress, 
+    output  logic en1, 
+    output  logic en2,
+    output  logic en3
+);
 
 
-    logic button_pressed, previous_signal, change_state;
+    logic button_pressed; 
+    logic previous_signal;
+    logic change_state;
+    
     typedef enum logic [1 : 0] {S1, S2, S3} statetype;
-    statetype state, nextstate;
-
+    
+    statetype state;
+    statetype nextstate;
 
     assign button_pressed = progress;
 
